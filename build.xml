@@ -52,21 +52,23 @@
     </target>
 
     <target name="diff">
-        <exec executable="${git.path}" failonerror="true">
+        <exec executable="${git.path}">
             <arg line="fetch"/>
         </exec>
-        <exec executable="${git.path}" resultproperty="hasDifferences" failonerror="true">
+        <exec executable="${git.path}" resultproperty="hasDifferences">
             <arg line="diff origin/master --quiet"/>
         </exec>
-        <exec if:true="hasDifferences" executable="${git.path}" failonerror="true">
-            <arg line="add ./src"/>
+        <echo if:set="hasDifferences">HAS DIFFERENCES</echo>
+        <!--<exec if:true="hasDifferences" executable="${git.path}" failonerror="true">
+            <arg line="add ."/>
         </exec>
-        <exec if:true="hasDifferences" executable="${git.path}" failonerror="true">
+        <-->
+<!--        <exec if:true="hasDifferences" executable="${git.path}" failonerror="true">
             <arg line="commit -m 'ant found diff, commit and push' "/>
         </exec>
         <exec if:true="hasDifferences" executable="${git.path}" failonerror="true">
             <arg line="push"/>
-        </exec>
+        </exec>-->
     </target>
 
 </project>
