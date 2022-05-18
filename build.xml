@@ -64,7 +64,8 @@
                 <equals arg1="${isDifferent}" arg2="1"/>
             </or>
         </condition>
-        <echo if:set="hasDifferences">has differences</echo>
+        <echo if:set="hasDifferences">There is a difference. Committing and pushing...</echo>
+        <echo unless:set="hasDifferences">There is NO difference. No commit and push needed.</echo>
 
         <exec if:set="hasDifferences" executable="${git.path}">
             <arg line="add ."/>
