@@ -55,20 +55,26 @@
         <exec executable="${git.path}">
             <arg line="fetch"/>
         </exec>
-        <exec executable="${git.path}" resultproperty="hasDifferences">
+        <exec executable="${git.path}" resultproperty="isDifferent">
             <arg line="diff origin/master --quiet"/>
         </exec>
-        <echo if:set="hasDifferences">HAS DIFFERENCES</echo>
-        <!--<exec if:true="hasDifferences" executable="${git.path}" failonerror="true">
+
+        <condition property="hasDifferences">
+            <or>
+                <equals arg1="${isDifferent}" arg2="1"/>
+            </or>
+        </condition>
+        <echo if:set="hasDifferences">has differences</echo>
+
+        <exec if:set="hasDifferences" executable="${git.path}">
             <arg line="add ."/>
         </exec>
-        <-->
-<!--        <exec if:true="hasDifferences" executable="${git.path}" failonerror="true">
+        <exec if:set="hasDifferences" executable="${git.path}">
             <arg line="commit -m 'ant found diff, commit and push' "/>
         </exec>
-        <exec if:true="hasDifferences" executable="${git.path}" failonerror="true">
+        <exec if:set="hasDifferences" executable="${git.path}">
             <arg line="push"/>
-        </exec>-->
+        </exec>
     </target>
 
 </project>
