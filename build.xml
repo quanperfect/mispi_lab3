@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="lab3" default="compile">
+<project name="lab3" default="compile" xmlns:if="ant:if" xmlns:unless="ant:unless">
 
 
     <property file="build.properties"/>
@@ -51,8 +51,22 @@
         </xmlvalidate>
     </target>
 
-    <target name="dif">
-        
+    <target name="diff">
+        <exec executable="${git.path}" failonerror="true">
+            <arg line="fetch"/>
+        </exec>
+        <exec executable="${git.path}" resultproperty="hasDifferences" failonerror="true">
+            <arg line="diff origin/master --quiet"/>
+        </exec>
+        <exec if:true="hasDifferences" executable="${git.path}" failonerror="true">
+            <arg line="add ./src"/>
+        </exec>
+        <exec if:true="hasDifferences" executable="${git.path}" failonerror="true">
+            <arg line="commit -m 'ant found diff, commit and push' "/>
+        </exec>
+        <exec if:true="hasDifferences" executable="${git.path}" failonerror="true">
+            <arg line="push"/>
+        </exec>
     </target>
 
 </project>
