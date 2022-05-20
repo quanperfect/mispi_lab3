@@ -55,7 +55,7 @@
             <arg line="fetch"/>
         </exec>
         <exec executable="${git.path}" resultproperty="isDifferent">
-            <arg line="diff origin/master --quiet"/>
+            <arg line="diff --quiet origin/master ${src.dir}"/>
         </exec>
 
         <condition property="hasDifferences">
@@ -64,7 +64,7 @@
             </or>
         </condition>
         <exec if:set="hasDifferences" executable="${git.path}">
-            <arg line="add ."/>
+            <arg line="add ${src.dir}"/>
         </exec>
         <exec if:set="hasDifferences" executable="${git.path}">
             <arg line="commit -m 'ant found diff, commit and push' "/>
