@@ -4,9 +4,6 @@
 
     <property file="build.properties"/>
 
-<!--    <property name="git.macro" location="dop_task/build.xml"/>-->
-<!--    <import file="${git.macro}"/>-->
-
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="*.jar"/>
     </path>
@@ -34,19 +31,21 @@
         <junit printsummary="yes">
             <formatter type="brief" usefile="false"/>
 
-            <classpath location="${lib.dir}/junit-3.8.2.jar"/>
+            <classpath location="${lib.dir}/junit-4.12.jar"/>
+            <classpath location="${lib.dir}/hamcrest-core-1.3.jar"/>
             <classpath>
                 <pathelement location="${classes.dir}"/>
             </classpath>
-            <test name="com.example.Web3.utils.HitCheckerTest"/>
-            <test name="com.example.Web3.utils.ValidatorTest"/>
+<!--            <test name="com.example.Web3.utils.HitCheckerTest"/>
+            <test name="com.example.Web3.utils.ValidatorTest"/>-->
+            <test name="com.example.Web3.utils.TestRunner"/>
         </junit>
     </target>
 
     <target name="xml">
         <xmlvalidate failonerror="no" lenient="yes" warn="yes"
                      classname="org.apache.xerces.parsers.SAXParser"
-            classpath="${lib.dir}/xercesImpl-2.4.0.jar">
+                     classpath="${lib.dir}/xercesImpl-2.4.0.jar">
             <fileset dir="src" includes="**/*.xml"/>
         </xmlvalidate>
     </target>

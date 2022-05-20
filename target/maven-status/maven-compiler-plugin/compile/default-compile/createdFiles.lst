@@ -1,0 +1,8 @@
+com\example\Web3\dao\ResultDao.class
+com\example\Web3\utils\HibernateSessionFactoryUtil.class
+com\example\Web3\utils\Validator.class
+com\example\Web3\beans\TimeBean.class
+com\example\Web3\services\ResultService.class
+com\example\Web3\beans\ResultBean.class
+com\example\Web3\entity\Result.class
+com\example\Web3\utils\HitChecker.class
